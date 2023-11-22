@@ -5,6 +5,7 @@ const cors = require("cors");
 const pkg = require("../package.json");
 
 const server = express();
+server.set("pkg", pkg);
 server.name = "API";
 
 server.use(cors());
