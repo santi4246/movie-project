@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         budgetUSD: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, { timestamps: false });

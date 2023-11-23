@@ -28,12 +28,12 @@ const { Movie, Producer, Actor, Genre, Picture } = sequelize.models;
 
 Producer.hasMany(Movie);
 Movie.belongsTo(Producer);
-Movie.belongsToMany(Actor, { through: "ActorMovies" });
-Actor.belongsToMany(Movie, { through: "ActorMovies" });
+Movie.belongsToMany(Actor, { through: "ActorMovies", foreignKey: "MovieId", timestamps: false });
+Actor.belongsToMany(Movie, { through: "ActorMovies", foreignKey: "ActorId", timestamps: false });
 Genre.hasMany(Movie);
 Movie.belongsTo(Genre);
-Movie.hasOne(Picture);
-Picture.belongsTo(Movie);
+Picture.hasOne(Movie);
+Movie.belongsTo(Picture);
 
 module.exports = {
     ...sequelize.models,
