@@ -18,7 +18,7 @@ Actualmente las versiónes necesarias son:
 - __Node__: 12.18.3 o mayor
 - __NPM__: 6.14.16 o mayor
 
-Para verificar que versión tienen instalada:
+Para verificar que versión está instalada:
 
 ```bash
 node -v
@@ -33,7 +33,7 @@ En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
 
 ```env
 PORT = 3001
-DB_URL = postgres://postgres.pprsjexkbxngxwdcsjer:[YOUR-PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
+DB_URL = postgres://postgres.[USER]:[PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
 ```
 
 Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
@@ -44,8 +44,7 @@ El contenido de `client` fue creado usando: Create React App.
 
 La idea general es crear una aplicación en la cual se puedan ver las distintas películas disponibles junto con información relevante de los mismas y a partir de ella poder, entre otras cosas:
 
-- Buscar películas
-- Filtrarlas / Ordenarlas
+- Mostrar películas
 - Agregar nuevas películas
 
 #### Tecnologías necesarias
