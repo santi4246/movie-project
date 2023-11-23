@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const pkg = require("../package.json");
+const routes = require("./routes");
 
 const server = express();
 server.set("pkg", pkg);
@@ -28,6 +29,7 @@ server.get("/", (req, res, next) => {
         version: server.get("pkg").version
     });
 });
+server.use("/api", routes);
 
 server.use((err, req, res, next) => {
     const status = err.status || 500;

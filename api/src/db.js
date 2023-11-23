@@ -24,7 +24,16 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Movie } = sequelize.models;
+const { Movie, Producer, Actor, Genre, Picture } = sequelize.models;
+
+Producer.hasMany(Movie);
+Movie.belongsTo(Producer);
+Movie.belongsToMany(Actor, { through: "ActorMovies" });
+Actor.belongsToMany(Movie, { through: "ActorMovies" });
+Genre.hasMany(Movie);
+Movie.belongsTo(Genre);
+Movie.hasOne(Picture);
+Picture.belongsTo(Movie);
 
 module.exports = {
     ...sequelize.models,
