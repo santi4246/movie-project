@@ -60,7 +60,7 @@ La idea general es crear una aplicación en la cual se puedan ver las distintas 
 El modelo de la base de datos deberá tener las siguientes entidades:
 
 <p align="right">
-  <img height="200" src="./IMG-20231122-WA0000.jpg" />
+  <img height="400" wide="400" src="./IMG-20231122-WA0000.jpg" />
 </p>
 
 ## Backend
