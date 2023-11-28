@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const fetchMovies = createAsyncThunk("fetchMovies", async () => {
-    const response = await axios(`https://movie-project-pvjd.onrender.com/api/movies`);    
+    const response = await axios(`/movies`);    
     return response.data;
 });
 
