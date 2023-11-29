@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { postMovies } from "../../redux/features/movies/moviesSlice";
 
 const Form = () => {
+    const dispatch = useDispatch();
     const [input, setInput] = useState({
         name: "", 
         duration: "", 
@@ -18,13 +20,16 @@ const Form = () => {
             path: "",
             weight: "",
             wide: "",
-            height: ""
+            high: ""
         },
         actors: []
     });    
     const [actors, setActors] = useState([]);
     const [error, setError] = useState({});
     const [submit, setSubmit] = useState(false);
+    const data = useSelector((state) => {        
+        return state.message;
+    });
     useEffect(() => {
         validateActors(input.actors);        
     }, [input]);
@@ -40,7 +45,7 @@ const Form = () => {
             case "picturePath": return (!value) ? setError({ ...error, picturePath: `The field cannot be null` }) : setError({ ...error, picturePath: "" })
             case "pictureWeight": return (!value) ? setError({ ...error, pictureWeight: `The field cannot be null` }) : setError({ ...error, pictureWeight: "" })
             case "pictureWide": return (!value) ? setError({ ...error, pictureWide: `The field cannot be null` }) : setError({ ...error, pictureWide: "" })
-            case "pictureHeight": return (!value) ? setError({ ...error, pictureHeight: `The field cannot be null` }) : setError({ ...error, pictureHeight: "" })            
+            case "pictureHigh": return (!value) ? setError({ ...error, pictureHigh: `The field cannot be null` }) : setError({ ...error, pictureHigh: "" })
             default: break;
         }
     }
@@ -80,14 +85,13 @@ const Form = () => {
             setInput({ ...input, picture: { ...input.picture, wide: event.target.value } })
             validateInput(event.target.name, event.target.value);
         }
-        else if (event.target.name === "pictureHeight") {
-            setInput({ ...input, picture: { ...input.picture, height: event.target.value } })
+        else if (event.target.name === "pictureHigh") {
+            setInput({ ...input, picture: { ...input.picture, high: event.target.value } })
             validateInput(event.target.name, event.target.value);
         }
         else {
             setInput({ ...input, [event.target.name]: event.target.value });
-            validateInput(event.target.name, event.target.value);
-            console.log(input);
+            validateInput(event.target.name, event.target.value);            
         }
     }
     function handleChangeActors (event, index) {
@@ -119,6 +123,8 @@ const Form = () => {
     function handleSubmit (event) {
         event.preventDefault();
         setSubmit(true);
+        console.log("Input: ", input);
+        dispatch(postMovies(input));
         setInput({
             name: "", 
             duration: "", 
@@ -135,10 +141,11 @@ const Form = () => {
                 path: "",
                 weight: "",
                 wide: "",
-                height: ""
+                high: ""
             },
             actors: []
         });
+        console.log("Data: ", data);
     }
     return(
         <div>
@@ -174,17 +181,17 @@ const Form = () => {
                     {error.genreName ? <p>{error.genreName}</p> : null}
                     {/* Picture */}
                     <label>Picture path: </label>
-                    <input name = "picturePath" value = {input.picture.path} onChange = { handleChange } />
+                    <input name = "picturePath" value = {input.picture.path} type = "text" onChange = { handleChange } />
                     {error.picturePath ? <p>{error.picturePath}</p> : null}
                     <label>Picture weight: </label>
-                    <input name = "pictureWeight" value = {input.picture.weight} onChange = { handleChange } />
+                    <input name = "pictureWeight" value = {input.picture.weight} type = "text" onChange = { handleChange } />
                     {error.pictureWeight ? <p>{error.pictureWeight}</p> : null}
                     <label>Picture wide: </label>
-                    <input name = "pictureWide" value = {input.picture.wide} onChange = { handleChange } />
+                    <input name = "pictureWide" value = {input.picture.wide} type = "text" onChange = { handleChange } />
                     {error.pictureWide ? <p>{error.pictureWide}</p> : null}
-                    <label>Picture height: </label>
-                    <input name = "pictureHeight" value = {input.picture.height} onChange = { handleChange } />
-                    {error.pictureHeight ? <p>{error.pictureHeight}</p> : null}
+                    <label>Picture high: </label>
+                    <input name = "pictureHigh" value = {input.picture.high} type = "text" onChange = { handleChange } />
+                    {error.pictureHigh ? <p>{error.pictureHigh}</p> : null}
                     {/* Actors */}                    
                     <h4>Actors: <button onClick = {(e, i) => onClickPlusButton(e, i)}>+</button></h4>
                 </div>
@@ -205,7 +212,7 @@ const Form = () => {
                     }
                 </div>
                 <div>
-                    <button type = "submit" value = {"create"} disabled = { error.name || !input.name || error.duration || !input.duration || error.rating || !input.rating || error.budgetUSD || !input.budgetUSD || error.producerName || !input.producer.name || error.fundationDate || !input.producer.fundationDate || error.genreName || !input.genre.name || error.picturePath || !input.picture.path || error.pictureWeight || !input.picture.weight || error.pictureWide || !input.picture.wide || error.pictureHeight || !input.picture.height || error.actors || !input.actors } onClick={handleSubmit}>Create Game</button>
+                    <button type = "submit" value = {"create"} disabled = { error.name || !input.name || error.duration || !input.duration || error.rating || !input.rating || error.budgetUSD || !input.budgetUSD || error.producerName || !input.producer.name || error.fundationDate || !input.producer.fundationDate || error.genreName || !input.genre.name || error.picturePath || !input.picture.path || error.pictureWeight || !input.picture.weight || error.pictureWide || !input.picture.wide || error.pictureHigh || !input.picture.high || error.actors || !input.actors } onClick={handleSubmit}>Create Game</button>
                 </div>
             </form>
             {submit ? <h3>Movie successfully created!</h3> : null}

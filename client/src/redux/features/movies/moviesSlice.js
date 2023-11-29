@@ -13,9 +13,13 @@ export const fetchMovies = createAsyncThunk("fetchMovies", async () => {
     return response.data;
 });
 
-export const postMovies = createAsyncThunk("postMovies", async (data) => {
-    const response = await axios.post("/movies", data);
-    return response.data;
+export const postMovies = createAsyncThunk("postMovies", async (obj) => {
+    try {
+        const response = await axios.post("/movies", obj);        
+        return response.data;
+    } catch (error) {
+        return { message: error.message }
+    }
 });
 
 export const moviesSlice = createSlice({
@@ -34,7 +38,7 @@ export const moviesSlice = createSlice({
         [fetchMovies.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error.message
-        }
+        }        
     },
     extraReducers: {
         [postMovies.pending]: (state) => {
@@ -42,7 +46,7 @@ export const moviesSlice = createSlice({
         },
         [postMovies.fulfilled]: (state, action) => {
             state.loading = false;
-            state.message = action.payload;
+            state.message = action.payload.data.message;
             state.error = ""
         },
         [postMovies.rejected]: (state, action) => {

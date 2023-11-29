@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
         id: v4(),
         name: req.body.name,
         duration: req.body.duration,
-        rating: req.body.rating,
+        rating: String(req.body.rating),
         budgetUSD: req.body.budgetUSD,
         producer: {
             name: req.body.producer.name,
