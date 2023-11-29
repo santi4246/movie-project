@@ -26,5 +26,5 @@ module.exports = async (req, res) => {
     }, {
         include: [Producer, Genre, Picture, Actor]
     });    
-    response(res, 201, newMovie);
+    response(res, 201, { message: `The name ${newMovie.name} was successfully created` });
 }
