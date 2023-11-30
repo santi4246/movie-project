@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route index path = "/home" element = { <Home/> }/>
+        <Route path = "/" element = { <Home/> }/>
         <Route path = "/create" element = { <Form/> }/>
         <Route path = "*" element = { <Error/> }/>
       </Routes>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postMovies, message } from "../../redux/features/movies/moviesSlice";
+import { useDispatch } from "react-redux";
+import { postMovies } from "../../redux/features/movies/moviesSlice";
 import { useNavigate } from "react-router-dom";
 
 const Form = () => {
@@ -29,10 +29,10 @@ const Form = () => {
     const [actors, setActors] = useState([]);
     const [error, setError] = useState({});
     const [submit, setSubmit] = useState(false);
-    const dataServer = useSelector(message);
+    // const dataServer = useSelector(message);
     useEffect(() => {
         validateActors(input.actors);        
-    }, [input]);
+    }, [input, validateActors]);
     function validateInput (name, value) {
         const expDate = /\d{2,4}\/\d{1,2}\/\d{1,2}/
         switch (name) {
@@ -149,7 +149,7 @@ const Form = () => {
             },
             actors: []
         });
-        setTimeout(() => navigate("/home"), 5000);
+        setTimeout(() => navigate("/"), 5000);
     }
     return(
         <div>            
