@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postMovies } from "../../redux/features/movies/moviesSlice";
+import { postMovies, message } from "../../redux/features/movies/moviesSlice";
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -27,11 +27,9 @@ const Form = () => {
     const [actors, setActors] = useState([]);
     const [error, setError] = useState({});
     const [submit, setSubmit] = useState(false);
-    const data = useSelector((state) => {        
-        return state.message;
-    });
+    const dataServer = useSelector(message);
     useEffect(() => {
-        validateActors(input.actors);        
+        validateActors(input.actors);
     }, [input]);
     function validateInput (name, value) {        
         switch (name) {
@@ -122,8 +120,7 @@ const Form = () => {
     }
     function handleSubmit (event) {
         event.preventDefault();
-        setSubmit(true);
-        console.log("Input: ", input);
+        setSubmit(true);        
         dispatch(postMovies(input));
         setInput({
             name: "", 
@@ -144,8 +141,7 @@ const Form = () => {
                 high: ""
             },
             actors: []
-        });
-        console.log("Data: ", data);
+        });        
     }
     return(
         <div>
@@ -213,11 +209,11 @@ const Form = () => {
                 </div>
                 <div>
                     <button type = "submit" value = {"create"} disabled = { error.name || !input.name || error.duration || !input.duration || error.rating || !input.rating || error.budgetUSD || !input.budgetUSD || error.producerName || !input.producer.name || error.fundationDate || !input.producer.fundationDate || error.genreName || !input.genre.name || error.picturePath || !input.picture.path || error.pictureWeight || !input.picture.weight || error.pictureWide || !input.picture.wide || error.pictureHigh || !input.picture.high || error.actors || !input.actors } onClick={handleSubmit}>Create Game</button>
-                </div>
+                </div>                
             </form>
-            {submit ? <h3>Movie successfully created!</h3> : null}
+            {submit ? <p>The movie was successfully created!</p> : null }
         </div>
-    )
+    )    
 };
 
 export default Form;

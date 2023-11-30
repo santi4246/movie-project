@@ -26,34 +26,32 @@ export const moviesSlice = createSlice({
     name: "movies",
     initialState,
     reducers: {},
-    extraReducers: {
-        [fetchMovies.pending]: (state) => {
+    extraReducers: builder => {
+        builder.addCase(fetchMovies.pending, state => {
             state.loading = true;
-        },
-        [fetchMovies.fulfilled]: (state, action) => {
+        });
+        builder.addCase(fetchMovies.fulfilled, (state, action) => {
             state.loading = false;
             state.movies = action.payload.data;
-            state.error = ""
-        },
-        [fetchMovies.rejected]: (state, action) => {
-            state.loading = false;
-            state.error = action.error.message
-        }        
-    },
-    extraReducers: {
-        [postMovies.pending]: (state) => {
-            state.loading = true;
-        },
-        [postMovies.fulfilled]: (state, action) => {
-            state.loading = false;
-            state.message = action.payload.data.message;
-            state.error = ""
-        },
-        [postMovies.rejected]: (state, action) => {
+        });
+        builder.addCase(fetchMovies. rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
-        }
-    }
+        });
+        builder.addCase(postMovies.pending, state => {
+            state.loading = false;
+        });
+        builder.addCase(postMovies.fulfilled, (state, action) => {
+            state.loading = false;
+            state.message = action.payload.data.message;
+        });
+        builder.addCase(postMovies.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+    }    
 });
+
+export const message = (state) => state.message;
 
 export default moviesSlice.reducer;
