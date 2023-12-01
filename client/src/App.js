@@ -1,3 +1,5 @@
+// Styles
+import "./styles/app.css";
 // Components
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -11,14 +13,16 @@ axios.defaults.baseURL = "https://movie-project-pvjd.onrender.com/api"
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar/>
-      <Routes>
-        <Route path = "/" element = { <Home/> }/>
-        <Route path = "/create" element = { <Form/> }/>
-        <Route path = "*" element = { <Error/> }/>
-      </Routes>
-    </BrowserRouter>
+    <div className = "app">
+      <BrowserRouter>
+        <Navbar/>
+        <Routes>
+          <Route path = "/" element = { <Home/> }/>
+          <Route path = "/create" element = { <Form/> }/>
+          <Route path = "*" element = { <Error/> }/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: flex-end;
+    background: var(--primary-color);
+    height: 8vh;
+}
+
+.navbar ul {
+    display: flex;
+    margin-right: 1.5em;
+}
+
+.navlinks {
+    padding: 0 0.5em 0 0.5em;
+}

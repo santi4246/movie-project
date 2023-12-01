@@ -1,10 +1,11 @@
 import React from "react";
+import "../../styles/card.css";
 
 const Card = (props) => {
     console.log("Movie: ", props);
     return (
-        <div>
-            <h3>Name: {props.props.name}</h3>
+        <div className = "card">
+            <h4>Name: {props.props.name}</h4>
             <p>Rating: {props.props.rating}</p>
             <p>Budget: {props.props.budgetUSD}</p>
             <p>Producer: {props.props.producer.name}</p>

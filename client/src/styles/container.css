@@ -1,0 +1,30 @@
+.container {
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    border-radius: 15px;    
+}
+
+@media (min-width: 767px) {
+    .container {        
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 95%;
+        justify-items: center;
+        background: var(--primary-color);
+        color: #fff;
+        box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+        padding-bottom: 15px;
+    }
+}
+
+@media (min-width: 1023px) {
+    .container {        
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        width: 75%;
+        justify-items: center;
+        background: var(--primary-color);
+        color: #fff;
+        box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    }    
+}
