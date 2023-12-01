@@ -31,5 +31,7 @@
 }
 
 @media (min-width: 1023px) {
-    
+    .card {
+        width: 95%;
+    }    
 }

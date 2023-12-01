@@ -1,8 +1,7 @@
 import React from "react";
 import "../../styles/card.css";
 
-const Card = (props) => {
-    console.log("Movie: ", props);
+const Card = (props) => {    
     return (
         <div className = "card">
             <h4>Name: {props.props.name}</h4>

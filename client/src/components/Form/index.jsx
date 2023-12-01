@@ -126,8 +126,7 @@ const Form = () => {
     }
     function handleSubmit (event) {
         event.preventDefault();
-        setSubmit(true);
-        console.log("Input: ", input);
+        setSubmit(true);        
         dispatch(postMovies(input));        
         setInput({
             name: "", 
